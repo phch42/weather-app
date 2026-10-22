@@ -1,5 +1,5 @@
-import { getWeather } from "../models/WeatherModel.js";
-import { renderWeather } from "../views/WeatherView.js";
+import { searchCity, getWeather } from "../models/WeatherModel.js";
+import { renderWeather, renderSearchForm } from "../views/WeatherView.js";
 
 export function getUserLocation() {
     return new Promise((resolve, reject) => {
@@ -53,4 +53,36 @@ export async function loadWeather() {
         `;
         locationLabel.textContent = "Location unavailable";
     }
+}
+
+
+export function setupCitySearch() {
+    renderSearchForm();
+
+    const form = document.getElementById("search-form");
+    const input = document.getElementById("city-input");
+
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const cityName = input.value.trim();
+        if (!cityName) return;
+
+        const status = document.getElementById("weather-status");
+        status.textContent = "Searching for city...";
+
+        try {
+            const city = await searchCity(cityName);
+
+            if (!city) {
+                status.textContent = "City not found. Try another name.";
+                return;
+            }
+
+            const weather = await getWeather(city.latitude, city.longitude);
+            renderWeather(city, weather);
+        } catch (error) {
+            status.textContent = error.message || "Could not load the weather.";
+        }
+    });
 }

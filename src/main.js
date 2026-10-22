@@ -1,3 +1,3 @@
-import { loadWeather } from "./controllers/WeatherController.js";
+import { setupCitySearch } from "./controllers/WeatherController.js";
 
-loadWeather();
+setupCitySearch();
