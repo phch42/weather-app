@@ -97,6 +97,7 @@ export function setupCitySearch() {
             locationLabel.textContent = city.name;
             renderWeather(city, weather);
             status.textContent = "";
+            input.value = "";
         } catch (error) {
             status.textContent =
                 error.message || "Could not load the weather.";
