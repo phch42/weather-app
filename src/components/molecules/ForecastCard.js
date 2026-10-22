@@ -20,8 +20,8 @@ export function renderForecastCard(daily, index) {
                 ${getWeatherIcon(daily.weather_code[index])}
             </div>
             <p class="forecast-temperatures">
-                ${renderTemperature(daily.temperature_2m_max[index])} /
-                ${renderTemperature(daily.temperature_2m_min[index])}
+                ${renderTemperature(daily.temperature_2m_max[index])}C /
+                ${renderTemperature(daily.temperature_2m_min[index])}C
             </p>
             <p class="forecast-precipitation">
                 💧 ${daily.precipitation_sum[index]} mm

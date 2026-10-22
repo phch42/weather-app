@@ -12,15 +12,12 @@ export function renderDailyDetails(daily, index) {
             <div class="details-list" id="details-list">
                 <div class="detail-row">
                     <span>Weather</span>
-                    <strong>
-                        ${getWeatherIcon(daily.weather_code[index])}
-                        Code ${daily.weather_code[index]}
-                    </strong>
+                    <strong>${getWeatherIcon(daily.weather_code[index])}</strong>
                 </div>
                 <div class="detail-row">
                     <span>High / Low</span>
                     <strong>
-                        ${daily.temperature_2m_max[index]}° /
+                        ${daily.temperature_2m_max[index]}°C /
                         ${daily.temperature_2m_min[index]}°C
                     </strong>
                 </div>

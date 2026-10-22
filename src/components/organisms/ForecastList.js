@@ -10,7 +10,7 @@ export function renderForecastList(daily) {
                 </span>
             </div>
             <div class="forecast-grid">
-                ${daily.time.map((date, index) =>
+                ${daily.time.map((_, index) =>
                     renderForecastCard(daily, index)
                 ).join("")}
             </div>

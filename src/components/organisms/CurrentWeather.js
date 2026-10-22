@@ -10,10 +10,10 @@ export function renderCurrentWeather(daily, locationName) {
                 ${getWeatherIcon(daily.weather_code[0])}
             </div>
             <p class="current-temperature">
-                ${renderTemperature(daily.temperature_2m_max[0])}
+                ${renderTemperature(daily.temperature_2m_max[0])}C
             </p>
             <p class="weather-summary">
-                Today's forecast · High temperature
+                Today's high temperature
             </p>
 
             <div class="weather-metrics">

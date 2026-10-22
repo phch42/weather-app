@@ -1,3 +1,4 @@
+// Map Open-Meteo weather codes to representative weather icons.
 export function getWeatherIcon(code) {
     if (code === 0) return "☀️";
     if ([1, 2].includes(code)) return "🌤️";

@@ -30,7 +30,7 @@ self.addEventListener("install", (event) => {
     );
 });
 
-// Remove old caches and activate this service worker.
+// Delete outdated caches while preserving the current static and API caches.
 self.addEventListener("activate", (event) => {
     event.waitUntil(
         caches.keys()
@@ -45,10 +45,11 @@ self.addEventListener("activate", (event) => {
     );
 });
 
-// Handle requests using Network First for APIs and Cache First for static files.
+// Use Network First for API requests and Cache First for static files.
 self.addEventListener("fetch", (event) => {
     const request = event.request;
 
+    // Only cache GET requests; other methods may modify server data.
     if (request.method !== "GET") {
         return;
     }

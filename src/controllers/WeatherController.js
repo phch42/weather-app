@@ -1,6 +1,7 @@
 import { searchCity, getWeather } from "../models/WeatherModel.js";
 import { renderWeather, renderSearchForm } from "../views/WeatherView.js";
 
+// Wrap the browser's callback-based geolocation API in a Promise.
 export function getUserLocation() {
     return new Promise((resolve, reject) => {
         if (!navigator.geolocation) {
@@ -23,6 +24,7 @@ export function getUserLocation() {
                 ));
             },
             {
+                // Limit the wait and allow a recently cached position.
                 timeout: 10000,
                 maximumAge: 60000
             }
@@ -30,11 +32,13 @@ export function getUserLocation() {
     });
 }
 
+// Load weather for the user's current location and update the view.
 export async function loadWeather() {
     const locationLabel = document.getElementById("location-label");
+    const weatherContent = document.getElementById("weather-content");
 
     try {
-        document.getElementById("weather-content").innerHTML =
+        weatherContent.innerHTML =
             '<p class="status-message">Loading weather...</p>';
 
         const location = await getUserLocation();
@@ -46,16 +50,17 @@ export async function loadWeather() {
         locationLabel.textContent = "Your Location";
         renderWeather({ name: "Your Location" }, weather);
     } catch (error) {
-        document.getElementById("weather-content").innerHTML = `
-            <p class="status-message error-message">
-             ${error.message}
-            </p>
-`;
+        weatherContent.textContent = "";
+        const message = document.createElement("p");
+        message.className = "status-message error-message";
+        message.textContent = error.message;
+        weatherContent.appendChild(message);
+
         locationLabel.textContent = "Location unavailable";
     }
 }
 
-
+// Connect the city search form to the model and weather view.
 export function setupCitySearch() {
     renderSearchForm();
 
@@ -84,7 +89,8 @@ export function setupCitySearch() {
 
             renderWeather(city, weather);
         } catch (error) {
-            status.textContent = error.message || "Could not load the weather.";
+            status.textContent =
+                error.message || "Could not load the weather.";
         }
     });
 }
