@@ -19,8 +19,8 @@ export async function getWeather(latitude, longitude) {
     const params = new URLSearchParams({
         latitude,
         longitude,
-        daily: "weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max,wind_direction_10m_dominant",
-        hourly: "temperature_2m,weather_code,wind_speed_10m,wind_direction_10m",
+        daily: "weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max,wind_direction_10m_dominant,precipitation_sum,rain_sum,showers_sum,snowfall_sum",
+        hourly: "temperature_2m,weather_code,wind_speed_10m,wind_direction_10m,precipitation,rain,showers,snowfall",
         timezone: "auto",
         forecast_days: "5"
     });
