@@ -27,11 +27,13 @@ export function renderSearchForm() {
         <p class="status-message" id="weather-status">
             Search for a city to see its forecast.
         </p>
+
+        <div id="weather-content"></div>
     `;
 }
 
 export function renderWeather(location, weather) {
-    const app = document.getElementById("app");
+    const app = document.getElementById("weather-content");
     const daily = weather.daily;
 
     app.innerHTML = `

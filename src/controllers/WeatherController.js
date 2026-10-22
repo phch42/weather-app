@@ -35,7 +35,8 @@ export async function loadWeather() {
     const locationLabel = document.getElementById("location-label");
 
     try {
-        app.innerHTML = '<p class="status-message">Loading weather...</p>';
+        document.getElementById("weather-content").innerHTML =
+            '<p class="status-message">Loading weather...</p>';
 
         const location = await getUserLocation();
         const weather = await getWeather(
@@ -46,11 +47,11 @@ export async function loadWeather() {
         locationLabel.textContent = "Your Location";
         renderWeather({ name: "Your Location" }, weather);
     } catch (error) {
-        app.innerHTML = `
+        document.getElementById("weather-content").innerHTML = `
             <p class="status-message error-message">
-                ${error.message}
+             ${error.message}
             </p>
-        `;
+`;
         locationLabel.textContent = "Location unavailable";
     }
 }
@@ -80,6 +81,8 @@ export function setupCitySearch() {
             }
 
             const weather = await getWeather(city.latitude, city.longitude);
+            document.getElementById("location-label").textContent = city.name;
+
             renderWeather(city, weather);
         } catch (error) {
             status.textContent = error.message || "Could not load the weather.";
