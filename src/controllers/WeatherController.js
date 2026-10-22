@@ -31,7 +31,6 @@ export function getUserLocation() {
 }
 
 export async function loadWeather() {
-    const app = document.getElementById("app");
     const locationLabel = document.getElementById("location-label");
 
     try {
