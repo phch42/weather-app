@@ -1,4 +1,4 @@
-const STATIC_CACHE = "weather-static-v1";
+const STATIC_CACHE = "weather-static-v2";
 const API_CACHE = "weather-api-v1";
 
 const STATIC_FILES = [
