@@ -5,6 +5,7 @@ const STATIC_FILES = [
     "./",
     "./index.html",
     "./manifest.json",
+    "./assets/icons/weather.svg",
     "./assets/css/style.css",
     "./src/main.js",
     "./src/models/WeatherModel.js",
