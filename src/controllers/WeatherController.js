@@ -50,13 +50,17 @@ export async function loadWeather() {
         locationLabel.textContent = "Your Location";
         renderWeather({ name: "Your Location" }, weather);
     } catch (error) {
-        weatherContent.textContent = "";
-        const message = document.createElement("p");
-        message.className = "status-message error-message";
-        message.textContent = error.message;
-        weatherContent.appendChild(message);
+        // Don't replace a forecast that has already been rendered.
+        if (!weatherContent.querySelector(".weather-hero")) {
+            weatherContent.textContent = "";
 
-        locationLabel.textContent = "Location unavailable";
+            const message = document.createElement("p");
+            message.className = "status-message error-message";
+            message.textContent = error.message;
+            weatherContent.appendChild(message);
+
+            locationLabel.textContent = "Location unavailable";
+        }
     }
 }
 
@@ -66,6 +70,7 @@ export function setupCitySearch() {
 
     const form = document.getElementById("search-form");
     const input = document.getElementById("city-input");
+    const locationLabel = document.getElementById("location-label");
 
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
@@ -84,10 +89,14 @@ export function setupCitySearch() {
                 return;
             }
 
-            const weather = await getWeather(city.latitude, city.longitude);
-            document.getElementById("location-label").textContent = city.name;
+            const weather = await getWeather(
+                city.latitude,
+                city.longitude
+            );
 
+            locationLabel.textContent = city.name;
             renderWeather(city, weather);
+            status.textContent = "";
         } catch (error) {
             status.textContent =
                 error.message || "Could not load the weather.";
